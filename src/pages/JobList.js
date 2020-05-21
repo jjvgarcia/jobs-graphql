@@ -20,11 +20,7 @@ import {GET_ALL_JOBS} from '../queries';
 const columns = [
     {id: 'title', label: 'Title', minWidth: 170},
     {id: 'commitment.title', label: 'Commitment', minWidth: 100},
-    {
-        id: 'company.name',
-        label: 'Company',
-        minWidth: 170
-    }
+    {id: 'company.name', label: 'Company', minWidth: 170}
 ];
 
 const useStyles = makeStyles({
