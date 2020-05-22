@@ -24,7 +24,7 @@ const validations = Yup.object().shape({
 
 const Subscribe = () => {
 
-    const [subscribe] = useMutation(SUBSCRIBE);
+    const [subscribe, {loading: mutationLoading, error: mutationError}] = useMutation(SUBSCRIBE);
 
 
     const formik = useFormik({
@@ -48,8 +48,12 @@ const Subscribe = () => {
                     toast.success('Sucesso!');
                 })
                 .catch(err => {
-                    console.log(err);
-                    toast.error('Ops! Algo deu errado!');
+                    console.log({err});
+                    if(err.message) {
+                        toast.error(err.message);
+                    } else {
+                        toast.error('Ops! Algo deu errado!');
+                    }
                 });
 
 
@@ -67,6 +71,7 @@ const Subscribe = () => {
             <Grid container justify='center'>
                 <Grid item>
                     <form onSubmit={formik.handleSubmit}>
+                        {mutationError && <p align='center' style={{color: 'orange'}}>Error :( Please try again</p>}
                         <Grid container direction='row' alignItems='flex-start' spacing={1}>
                             <Grid item xs={12} sm={5}>
                                 <TextField
@@ -106,7 +111,7 @@ const Subscribe = () => {
                                         fullWidth
                                         color='primary'
                                         variant='contained'
-                                        disabled={!formik.isValid || formik.isSubmitting}
+                                        disabled={mutationLoading || !formik.isValid || formik.isSubmitting}
                                         style={{marginTop: 9}}
                                 >Enviar</Button>
                             </Grid>
