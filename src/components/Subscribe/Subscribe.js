@@ -2,6 +2,7 @@ import React from 'react';
 import {toast} from 'react-toastify';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Alert from "@material-ui/lab/Alert";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -71,8 +72,10 @@ const Subscribe = () => {
             <Grid container justify='center'>
                 <Grid item>
                     <form onSubmit={formik.handleSubmit}>
-                        {mutationError && <p align='center' style={{color: 'orange'}}>Error :( Please try again</p>}
                         <Grid container direction='row' alignItems='flex-start' spacing={1}>
+                            <Grid item xs={12}>
+                                {mutationError && <Alert severity="error">Error :( Please try again</Alert>}
+                            </Grid>
                             <Grid item xs={12} sm={5}>
                                 <TextField
                                     autoFocus
